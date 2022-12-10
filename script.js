@@ -1,8 +1,28 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-var advancedFormat = import('dayjs/plugin/advancedFormat')
-dayjs.extend(advancedFormat)
+
+var currentDayEl = $('#currentDay');
+currentDayEl.text(dayjs().format('dddd, MMMM Do'));
+
+var timeBlockEl = $('.time-block');
+var hourEl = $('.hour');
+var descriptionEl = $('.description');
+
+var currentHour = dayjs().hour();
+// console.log(currentHour);
+
+$.each(timeBlockEl, function () {
+  var timeBlockHour = parseInt($(this).attr('id').split('hour-')[1]);
+  // console.log(timeBlockHour);
+  if (timeBlockHour < currentHour) {
+    $(this).addClass('past');
+  } else if (timeBlockHour === currentHour) {
+    $(this).addClass('present');
+  } else {
+    $(this).addClass('future');
+  } 
+})
 
 $(function () {
   // TODO: Add a listener for click events on the save button. This code should
@@ -24,8 +44,3 @@ $(function () {
   //
   // TODO: Add code to display the current date in the header of the page.
 });
-
-
-var currentDay = $('#currentDay');
-
-currentDay.text(dayjs().format('dddd, MMMM Do'));
