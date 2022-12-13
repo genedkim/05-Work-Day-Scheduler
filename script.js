@@ -5,7 +5,7 @@ $(document).ready(function() {
 
   // Display current day in the header of the page
   var currentDayEl = $('#currentDay');
-  currentDayEl.text(dayjs().format('dddd, MMMM Do'));
+  currentDayEl.text(dayjs().format('dddd, MMMM D'));
   
   // Declare variables for time-block div's and the current hour using dayjs()
   var timeBlockEl = $('.time-block');
